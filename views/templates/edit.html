@@ -1,40 +1,77 @@
 <% extend 'layout' %>
 
+<% block 'head' : %>
+<script src="/js/ace.js" type="text/javascript" charset="utf-8"></script>
+<% end %>
+
 <% block 'content' : %>
 <div class="row">
 <form class="form-horizontal" action="./" method="post" >
-        <fieldset>
+    <input type="hidden" name="_method"  value="put" />
+    <fieldset>
 
-            <!-- Form Name -->
-            <legend>Form Name</legend>
+        <!-- Form Name -->
+        <legend>Form Name</legend>
 
-            <!-- Text input-->
-            <div class="form-group">
-                <label class="control-label" for="name">name</label>
-                <div class="controls">
-                    <input id="name" name="name" type="text" placeholder="Name" class="input-xlarge form-control" required="" value="<%= @template.name %>">
-                    <p class="help-block">Name of template</p>
-                </div>
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="control-label" for="name">name</label>
+            <div class="controls">
+                <input id="name" name="name" type="text" placeholder="Name" class="input-xlarge form-control" required="" value="<%= @template.name %>">
+                <p class="help-block">Name of template</p>
             </div>
+        </div>
 
-            <!-- Textarea -->
-            <div class="form-group">
-                <label class="control-label" for="source">Source</label>
-                <div class="controls">
-                    <textarea class="form-control" id="source" name="source"><%= @template.source %></textarea>
-                </div>
+        <!-- Textarea -->
+        <div class="form-group">
+            <label class="control-label" for="source">Source</label>
+            <div class="controls">
+                <textarea data-editor="javascript" rows="50" class="form-control" id="source" name="source"><%= @template.source %></textarea>
             </div>
+        </div>
 
-            <!-- Button -->
-            <div class="form-group">
-                <label class="control-label" for="singlebutton">Single Button</label>
-                <div class="controls">
-                    <button id="singlebutton" name="singlebutton" class="btn btn-primary">Button</button>
-                </div>
+        <!-- Button -->
+        <div class="form-group">
+            <label class="control-label" for="singlebutton">Single Button</label>
+            <div class="controls">
+                <button id="singlebutton" name="singlebutton" class="btn btn-primary">Button</button>
             </div>
+        </div>
 
-        </fieldset>
-    </form>
+    </fieldset>
+</form>
+<script type="text/javascript" charset="utf-8">
+    // Hook up ACE editor to all textareas with data-editor attribute
+    $(function () {
+        $('textarea[data-editor]').each(function () {
+            var textarea = $(this);
+ 
+            var mode = textarea.data('editor');
+ 
+            var editDiv = $('<div>', {
+                position: 'absolute',
+                width: textarea.width(),
+                height: textarea.height(),
+                'class': textarea.attr('class')
+            }).insertBefore(textarea);
+ 
+            textarea.css('visibility', 'hidden');
+ 
+            var editor = ace.edit(editDiv[0]);
+            editor.renderer.setShowGutter(false);
+            editor.getSession().setValue(textarea.val());
+            editor.setTheme("ace/theme/monokai");
+            editor.getSession().setMode("ace/mode/" + mode);
+            // editor.setTheme("ace/theme/idle_fingers");
+            
+            // copy back to textarea on form submit...
+            textarea.closest('form').submit(function () {
+                textarea.val(editor.getSession().getValue());
+            })
+ 
+        });
+    });
+</script>
 </div>
 <% end %>
 

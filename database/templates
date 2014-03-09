@@ -1,6 +1,12 @@
-{"k":"0000000078","o":"0000000038","v":"001"}
-{"_id":2,"_uid":2,"_dt":1394363156785,"_s":"6c259f45dfc2229420d27b469c9852c6"}
-{"_id":{"$wrap":"$oid","v":2},"__v":0}
+{"k":"0000000078","o":"0000000630","v":"001"}
+{"_id":2,"_uid":3,"_dt":1394376415865,"_s":"94437ee32998589bab27dad3887673f2"}
+{"_id":{"$wrap":"$oid","v":2},"__v":0,"name":"Index","source":"exports.index = function(req, res ) {\r\n\r\n    Template.count( {}, function( err, count ){\r\n        var paginationParams = {};\r\n        paginationParams.count = count;\r\n        paginationParams.page = req.query.page;\r\n\r\n        var pagination = paginator.paginate( paginationParams );\r\n\r\n        return Template.find({}).skip(pagination.start-1).limit( paginator.defaults.size).exec(function( err, templates ){\r\n            return res.render('templates/index', { templates: templates, pagination: pagination });\r\n        });\r\n    });\r\n};\r\n"}
 {"k":"0000000078","o":"0000000088","v":"001"}
 {"_id":3,"_uid":3,"_dt":1394365460174,"_s":"a0e92bd7a4df0391663fc31f1f75df30"}
 {"name":"Test1","source":"<% JSON.stringify {} %>","_id":{"$wrap":"$oid","v":3},"__v":0}
+{"k":"0000000078","o":"0000000712","v":"001"}
+{"_id":2,"_uid":3,"_dt":1394376509066,"_s":"b708cb17781a993635e5ed73770cb9ce"}
+{"_id":{"$wrap":"$oid","v":2},"__v":0,"name":"Index","source":"exports.index = function(req, res ) {\r\n\r\n    <%- @model %>.count( {}, function( err, count ){\r\n        var paginationParams = {};\r\n        paginationParams.count = count;\r\n        paginationParams.page = req.query.page;\r\n\r\n        var pagination = paginator.paginate( paginationParams );\r\n\r\n        return <%- @model %>.find({}).skip(pagination.start-1).limit( paginator.defaults.size).exec(function( err, <%- @model.toLowerCase() %> ){\r\n            return res.render('<%- @model.toLowerCase() %>/index', { <%- @model.toLowerCase() %>: <%- @model.toLowerCase() %>, pagination: pagination });\r\n        });\r\n    });\r\n};\r\n"}
+{"k":"0000000078","o":"0000000704","v":"001"}
+{"_id":2,"_uid":3,"_dt":1394381767838,"_s":"d432879da85fac4515ce447a33f57f87"}
+{"_id":{"$wrap":"$oid","v":2},"__v":0,"name":"Index","source":"exports.index = function(req, res ) {\r\n    <%- @model %>.count( {}, function( err, count ){\r\n        var paginationParams = {};\r\n        paginationParams.count = count;\r\n        paginationParams.page = req.query.page;\r\n\r\n        var pagination = paginator.paginate( paginationParams );\r\n\r\n        return <%- @model %>.find({}).skip(pagination.start-1).limit( paginator.defaults.size).exec(function( err, <%- @model.toLowerCase() %> ){\r\n            return res.render('<%- @model.toLowerCase() %>/index', { <%- @model.toLowerCase() %>: <%- @model.toLowerCase() %>, pagination: pagination });\r\n        });\r\n    });\r\n};"}

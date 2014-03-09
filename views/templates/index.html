@@ -1,1 +1,31 @@
-../debug.html
+<% extend 'layout' %>
+<% include 'helpers/templates' %>
+<% block 'content' : %>
+<div class="row">
+<table class="table" >
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% for template in @templates : %>
+            <tr>
+                <td><%- template._id %></td>
+                <td><%- template.name %></td>
+                <td>
+                    <a class="glyphicon glyphicon-th-list text-success" href="<%- @templateUrl template %>"> </a>
+                    <a class="glyphicon glyphicon-pencil text-warning" href="<%- @templateUrl template %>/edit"></a>
+                </td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+</div>
+<% end %>
+
+
+
+<!-- vim: set ft=html.ect.bootstrap3 : -->
