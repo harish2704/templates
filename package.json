@@ -7,6 +7,9 @@
   },
   "dependencies": {
     "express": "3.1.0",
-    "jade": "*"
+    "jade": "*",
+    "express-resource": "git+ssh://git@github.com:harish2704/express-resource-simple",
+    "ect": "*",
+    "generic-paginate": "git+ssh://git@github.com:harish2704/generic-paginate.git"
   }
 }

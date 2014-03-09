@@ -3,6 +3,7 @@
  * Module dependencies.
  */
 
+require('express-resource');
 var express = require('express')
   , routes = require('./routes')
   , http = require('http')
@@ -11,6 +12,7 @@ var express = require('express')
 var ECT = require( 'ect' );
 var ectRenderer = ECT({ watch: true, root: __dirname + '/views', ext: '.html' });
 
+require('./libs/db-connect');
 var app = express();
 
 app.engine('html', ectRenderer.render);
