@@ -1,13 +1,8 @@
 
 <% extend 'layout' %>
 <% block 'head' : %>
+<script src="/js/bundle.js"></script>
 <script src="/js/ace.js" type="text/javascript" charset="utf-8"></script>
-<script src="/js/coffee-script.js"></script>
-<script src="/js/ect.js"></script>
-<script src="/js/lingo.js"></script>
-<script src="/js/language.js"></script>
-<script src="/js/inflection.js"></script>
-<script src="/js/en.js"></script>
 <script src="/js/jquery.toObject.js"></script>
 <script src="/js/form2js.js"></script>
 
@@ -30,17 +25,26 @@
 <script type="text/html" id="template" charset="utf-8"><%- @template.source %></script>
 
 <script type="text/javascript" charset="utf-8">
+    var ect = require('ect'),
+        _ = require('underscore'),
+        lingo = require('lingo');
     var templates = templates || {};
     templates.page = $('#template').html();
     var editor = ace.edit("editor");
+    editor.setOptions({
+enableBasicAutocompletion: true,
+enableSnippets: true
+    });
     editor.setTheme("ace/theme/monokai");
     editor.getSession().setMode("ace/mode/javascript");
-    var renderer = new ECT({root: templates });
+    var renderer = new ect({root: templates });
 
     settingsForm = $("#settingsForm > form");
-settingsForm.submit( function(e){
+    settingsForm.submit( function(e){
         e.preventDefault();
-        editor.setValue( renderer.render('page', settingsForm.toObject() ) );
+        var data = settingsForm.toObject();
+        data = _.defaults( data, require('client-helpers') )
+        editor.setValue( renderer.render('page', data ) );
         })
 </script>
 
