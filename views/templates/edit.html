@@ -25,7 +25,7 @@
         <div class="form-group">
             <label class="control-label" for="name">settings</label>
             <div class="controls">
-                <textarea data-editor="javascript" rows="4" class="form-control" name="settings"><%= JSON.stringify @template.settings, null, '\t' %></textarea>
+                <textarea data-editor="javascript" class="form-control" name="settings"><%= JSON.stringify @template.settings, null, '\t' %></textarea>
                 <p class="help-block">Settings object </p>
             </div>
         </div>
@@ -35,7 +35,7 @@
         <div class="form-group">
             <label class="control-label" for="source">Source</label>
             <div class="controls">
-                <textarea data-editor="javascript" rows="4" class="form-control" id="source" name="source"><%= @template.source %></textarea>
+                <textarea data-editor="javascript" class="form-control" id="source" name="source"><%= @template.source %></textarea>
             </div>
         </div>
 
@@ -58,15 +58,15 @@
             var mode = textarea.data('editor');
  
             var editDiv = $('<div>', {
-                position: 'absolute',
-                width: textarea.width(),
-                height: textarea.height(),
                 'class': textarea.attr('class')
             }).insertBefore(textarea);
  
-            textarea.css('visibility', 'hidden');
+            textarea.css('display', 'none');
  
             var editor = ace.edit(editDiv[0]);
+            editor.setOptions({
+                    maxLines: Infinity
+                    });
             editor.renderer.setShowGutter(false);
             editor.getSession().setValue(textarea.val());
             editor.setTheme("ace/theme/monokai");

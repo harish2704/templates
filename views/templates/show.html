@@ -8,6 +8,8 @@
 <script src="/js/language.js"></script>
 <script src="/js/inflection.js"></script>
 <script src="/js/en.js"></script>
+<script src="/js/jquery.toObject.js"></script>
+<script src="/js/form2js.js"></script>
 
 <% end %>
 <% include 'helpers/templates' %>
@@ -38,7 +40,7 @@
     settingsForm = $("#settingsForm > form");
 settingsForm.submit( function(e){
         e.preventDefault();
-        gg=this;
+        editor.setValue( renderer.render('page', settingsForm.toObject() ) );
         })
 </script>
 
