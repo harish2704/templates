@@ -1,5 +1,9 @@
 <% extend 'layout' %>
 
+<% block 'head' : %>
+<script src="/js/ace.js" type="text/javascript" charset="utf-8"></script>
+<% end %>
+
 <% block 'content' : %>
 <div class="row">
 <form class="form-horizontal" action="./" method="post" >
@@ -12,8 +16,16 @@
             <div class="form-group">
                 <label class="control-label" for="name">name</label>
                 <div class="controls">
-                    <input id="name" name="name" type="text" placeholder="Name" class="input-xlarge form-control" required="">
+                    <input name="name" type="text" placeholder="Name" class="input-xlarge form-control" required="">
                     <p class="help-block">Name of template</p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label" for="name">settings</label>
+                <div class="controls">
+                    <textarea data-editor="javascript" rows="4" class="form-control" name="settings"></textarea>
+                    <p class="help-block">Settings object </p>
                 </div>
             </div>
 
@@ -21,7 +33,7 @@
             <div class="form-group">
                 <label class="control-label" for="source">Source</label>
                 <div class="controls">
-                    <textarea class="form-control" id="source" name="source">&lt;% JSON.stringify {} %&gt;</textarea>
+                    <textarea data-editor="javascript" rows="4" class="form-control" name="source"></textarea>
                 </div>
             </div>
 
@@ -35,6 +47,39 @@
 
         </fieldset>
     </form>
+
+<script type="text/javascript" charset="utf-8">
+    // Hook up ACE editor to all textareas with data-editor attribute
+    $(function () {
+        $('textarea[data-editor]').each(function () {
+            var textarea = $(this);
+ 
+            var mode = textarea.data('editor');
+ 
+            var editDiv = $('<div>', {
+                position: 'absolute',
+                width: textarea.width(),
+                height: textarea.height(),
+                'class': textarea.attr('class')
+            }).insertBefore(textarea);
+ 
+            textarea.css('visibility', 'hidden');
+ 
+            var editor = ace.edit(editDiv[0]);
+            editor.renderer.setShowGutter(false);
+            editor.getSession().setValue(textarea.val());
+            editor.setTheme("ace/theme/monokai");
+            editor.getSession().setMode("ace/mode/" + mode);
+            // editor.setTheme("ace/theme/idle_fingers");
+            
+            // copy back to textarea on form submit...
+            textarea.closest('form').submit(function () {
+                textarea.val(editor.getSession().getValue());
+            })
+ 
+        });
+    });
+</script>
 </div>
 <% end %>
 

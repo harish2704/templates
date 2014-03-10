@@ -1,5 +1,6 @@
 var Template = require('../models/Template'),
     _ = require('underscore'),
+    formBuilder = require('bootstrap-form-builder'),
     paginator = require('generic-paginate')( {defaults:{ size: 5 }});
 
 exports.index = function(req, res ) {
@@ -26,6 +27,15 @@ exports.load = function( id, req, res, next ){
 exports.create = function( req, res ){
 
     var userData = req.body;
+    if ( typeof userData.settings === 'string' ){
+        try{
+            userData.settings = JSON.parse( userData.settings );
+        }
+        catch( e ){
+            userData.settings = {};
+        }
+
+    }
 
     var template = new Template( userData );
     return template.save( function( err, template ){
@@ -39,7 +49,8 @@ exports.show = function( req, res ){
     var id = req.params.template;
 
     return Template.findById( id , function( err, template ){
-        return res.render('templates/show', {template: template });
+        var out = _.defaults( {template: template }, formBuilder.helpers );
+        return res.render('templates/show', out );
     });
 };
 
@@ -64,14 +75,23 @@ exports.edit = function( req, res ){
 
 exports.update = function( req, res ){
     var id = req.params.template;
-    var data = _.pick( req.body, 'name', 'source' );
+    var data = _.pick( req.body, 'name', 'source', 'settings' );
+    if ( typeof data.settings === 'string' ){
+        try{
+            data.settings = JSON.parse( data.settings );
+        }
+        catch( e ){
+            data.settings = {};
+        }
+    }
+
     return Template.findById( id , function( err, template ){
         template = _.extend( template, data );
         return template.save( function( err, template ){
             if ( err ){
                 return res.send(503);
             }
-            return res.render('debug', {template: template });
+            return res.redirect( 'back');
             
         });
 

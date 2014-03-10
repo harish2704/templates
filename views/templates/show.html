@@ -4,29 +4,43 @@
 <script src="/js/ace.js" type="text/javascript" charset="utf-8"></script>
 <script src="/js/coffee-script.js"></script>
 <script src="/js/ect.js"></script>
+<script src="/js/lingo.js"></script>
+<script src="/js/language.js"></script>
+<script src="/js/inflection.js"></script>
+<script src="/js/en.js"></script>
 
 <% end %>
 <% include 'helpers/templates' %>
 <% block 'content' : %>
 <div class="row">
-    <a class="btn btn-warning glyphicon glyphicon-pencil text-warning" href="<%- @templateUrl @template %>/edit"></a>
-</div>
-    <div class="row">
-        <div id="editor" style="height:300px;"></div>
+    <div class="row col-md-9 btn-group">
+        <a class="btn btn-warning glyphicon glyphicon-pencil" href="<%- @templateUrl @template %>/edit">Edit</a>
     </div>
-    <script type="text/html" id="template" charset="utf-8"><%- @template.source %></script>
+    <div class="row col-md-12">
+        <div class="row col-md-4" id="settingsForm">
+            <%- @bootstrap3 @template.settings %>
+        </div>
+        <div class="row col-md-8">
+            <div id="editor" style="height:300px;"></div>
+        </div>
+    </div>
+</div>
+<script type="text/html" id="template" charset="utf-8"><%- @template.source %></script>
 
-    <script type="text/javascript" charset="utf-8">
-        var templates = templates || {};
-        templates.page = $('#template').html();
-        var editor = ace.edit("editor");
-        editor.setTheme("ace/theme/monokai");
-        editor.getSession().setMode("ace/mode/javascript");
-        var renderer = new ECT({root: templates });
+<script type="text/javascript" charset="utf-8">
+    var templates = templates || {};
+    templates.page = $('#template').html();
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/monokai");
+    editor.getSession().setMode("ace/mode/javascript");
+    var renderer = new ECT({root: templates });
 
-
-        editor.insert( renderer.render('page', {model: "User"}) );
-    </script>
+    settingsForm = $("#settingsForm > form");
+settingsForm.submit( function(e){
+        e.preventDefault();
+        gg=this;
+        })
+</script>
 
 <% end %>
 
