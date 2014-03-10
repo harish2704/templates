@@ -1,4 +1,4 @@
-var helpers = {};
+var helpers = exports;
 var lingo = require('lingo');
 helpers.camelcase= lingo.camelcase;
 helpers.small = function( str ){
@@ -10,4 +10,3 @@ helpers.singularize = function ( str ) {
 };
 helpers.pluralize = function(str){ return lingo.en.pluralize(str); };
 
-module.exports = helpers;

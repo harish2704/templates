@@ -2,7 +2,6 @@
 <% extend 'layout' %>
 <% block 'head' : %>
 <script src="/js/bundle.js"></script>
-<script src="/js/ace.js" type="text/javascript" charset="utf-8"></script>
 <script src="/js/jquery.toObject.js"></script>
 <script src="/js/form2js.js"></script>
 
@@ -27,7 +26,10 @@
 <script type="text/javascript" charset="utf-8">
     var ect = require('ect'),
         _ = require('underscore'),
-        lingo = require('lingo');
+        lingo = require('lingo'),
+        vim = ace.acequire('ace/keyboard/vim').handler,
+        ace = require('brace');
+    
     var templates = templates || {};
     templates.page = $('#template').html();
     var editor = ace.edit("editor");
@@ -36,6 +38,7 @@ enableBasicAutocompletion: true,
 enableSnippets: true
     });
     editor.setTheme("ace/theme/monokai");
+    editor.setKeyboardHandler( vim );
     editor.getSession().setMode("ace/mode/javascript");
     var renderer = new ect({root: templates });
 
@@ -43,8 +46,9 @@ enableSnippets: true
     settingsForm.submit( function(e){
         e.preventDefault();
         var data = settingsForm.toObject();
-        data = _.defaults( data, require('client-helpers') )
+        data = _.defaults( data, require('./js/client-helpers') )
         editor.setValue( renderer.render('page', data ) );
+        editor.clearSelection();
         })
 </script>
 

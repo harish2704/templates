@@ -4,51 +4,57 @@
 <script src="/js/ace.js" type="text/javascript" charset="utf-8"></script>
 <% end %>
 
+<% include 'helpers/templates' %>
 <% block 'content' : %>
 <div class="row">
-<form class="form-horizontal" action="./" method="post" >
-    <input type="hidden" name="_method"  value="put" />
-    <fieldset>
 
-        <!-- Form Name -->
-        <legend>Form Name</legend>
+    <div class="row col-md-9 btn-group">
+        <a class="btn btn-success glyphicon glyphicon-th-list" href="<%- @templateUrl @template %>">View</a>
+    </div>
+    <div class="col-md-10">
+        <form class="form-horizontal" action="./" method="post" >
+            <input type="hidden" name="_method"  value="put" />
+            <fieldset>
 
-        <!-- Text input-->
-        <div class="form-group">
-            <label class="control-label" for="name">name</label>
-            <div class="controls">
-                <input id="name" name="name" type="text" placeholder="Name" class="input-xlarge form-control" required="" value="<%= @template.name %>">
-                <p class="help-block">Name of template</p>
-            </div>
-        </div>
+                <!-- Form Name -->
+                <legend>Form Name</legend>
 
-        <div class="form-group">
-            <label class="control-label" for="name">settings</label>
-            <div class="controls">
-                <textarea data-editor="javascript" class="form-control" name="settings"><%= JSON.stringify @template.settings, null, '\t' %></textarea>
-                <p class="help-block">Settings object </p>
-            </div>
-        </div>
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="control-label" for="name">name</label>
+                    <div class="controls">
+                        <input id="name" name="name" type="text" placeholder="Name" class="input-xlarge form-control" required="" value="<%= @template.name %>">
+                        <p class="help-block">Name of template</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="name">settings</label>
+                    <div class="controls">
+                        <textarea data-editor="javascript" class="form-control" name="settings"><%= JSON.stringify @template.settings, null, '\t' %></textarea>
+                        <p class="help-block">Settings object </p>
+                    </div>
+                </div>
 
 
-        <!-- Textarea -->
-        <div class="form-group">
-            <label class="control-label" for="source">Source</label>
-            <div class="controls">
-                <textarea data-editor="javascript" class="form-control" id="source" name="source"><%= @template.source %></textarea>
-            </div>
-        </div>
+                <!-- Textarea -->
+                <div class="form-group">
+                    <label class="control-label" for="source">Source</label>
+                    <div class="controls">
+                        <textarea data-editor="javascript" class="form-control" id="source" name="source"><%= @template.source %></textarea>
+                    </div>
+                </div>
 
-        <!-- Button -->
-        <div class="form-group">
-            <label class="control-label" for="singlebutton">Single Button</label>
-            <div class="controls">
-                <button id="singlebutton" name="singlebutton" class="btn btn-primary">Button</button>
-            </div>
-        </div>
+                <!-- Button -->
+                <div class="form-group">
+                    <div class="controls">
+                        <button id="singlebutton" name="singlebutton" class="btn btn-primary">Save</button>
+                    </div>
+                </div>
 
-    </fieldset>
-</form>
+            </fieldset>
+        </form>
+        </div.col-md-10>
 <script type="text/javascript" charset="utf-8">
     // Hook up ACE editor to all textareas with data-editor attribute
     $(function () {
