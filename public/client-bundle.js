@@ -49,6 +49,7 @@ require("brace/theme/vibrant_ink");
 require("brace/theme/xcode");
 
 require("brace/mode/javascript");
+require("brace/mode/json");
 require("brace/mode/java");
 require("brace/mode/c_cpp");
 require("brace/mode/coffee");
@@ -67,6 +68,7 @@ require("brace/mode/text");
 require("brace/mode/yaml");
 
 require("brace/snippets/javascript");
+require("brace/snippets/json");
 require("brace/snippets/coffee");
 require("brace/snippets/php");
 require("brace/snippets/python");

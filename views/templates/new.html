@@ -1,9 +1,5 @@
 <% extend 'layout' %>
 
-<% block 'head' : %>
-<script src="/js/bundle.js"></script>
-<% end %>
-
 <% block 'content' : %>
 <div class="row">
 <form class="form-horizontal" action="./" method="post" >
@@ -24,7 +20,7 @@
             <div class="form-group">
                 <label class="control-label" for="name">settings</label>
                 <div class="controls">
-                    <textarea data-editor="javascript" rows="4" class="form-control" name="settings"></textarea>
+                    <textarea data-mode="json" data-theme="monokai" rows="4" class="form-control" name="settings"></textarea>
                     <p class="help-block">Settings object </p>
                 </div>
             </div>
@@ -33,7 +29,7 @@
             <div class="form-group">
                 <label class="control-label" for="source">Source</label>
                 <div class="controls">
-                    <textarea data-editor="javascript" rows="4" class="form-control" name="source"></textarea>
+                    <textarea data-mode="javascript" data-theme="monokai" rows="4" class="form-control" name="source"></textarea>
                 </div>
             </div>
 
@@ -45,18 +41,27 @@
 
         </fieldset>
     </form>
+</div>
+<% end %>
+
+
+<% block 'scripts' : %>
+<script src="/js/bundle.js"></script>
+<script src="/js/custom-editor.js"></script>
 
 <script type="text/javascript" charset="utf-8">
     // Hook up ACE editor to all textareas with data-editor attribute
-    var ta = $('textarea[data-editor]');
+    var ta = $('textarea');
 
     TATransformer = ace.acequire('ace/ext/textarea');
     var settingsEditor = TATransformer.transformTextarea( ta[0] );
     var templateEditor = TATransformer.transformTextarea( ta[1] );
+    var options = { enableBasicAutocompletion: true, enableSnippets: true };
+    templateEditor.setOptions( options );
+    settingsEditor.setOptions( options );
 </script>
-</div>
-<% end %>
 
+<% end %>
 
 
 

@@ -13,7 +13,6 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
         <![endif]-->
         <link href="/css/app.css" rel="stylesheet">
-        <script src="/js/jquery.js"></script>
         <% content 'head' %>
     </head>
     <body>
@@ -33,8 +32,10 @@
         <div class="container">
             <%content 'content' %>
         </div>
+        <script src="/js/jquery.js"></script>
         <script src="/js/bootstrap.js"></script>
         <script src="/js/application.js"></script>
+        <%content 'scripts' %>
     </body>
 </html>
 

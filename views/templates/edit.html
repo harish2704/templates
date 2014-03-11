@@ -1,8 +1,5 @@
 <% extend 'layout' %>
 
-<% block 'head' : %>
-<script src="/js/bundle.js"></script>
-<% end %>
 
 <% include 'helpers/templates' %>
 <% block 'content' : %>
@@ -31,7 +28,7 @@
                 <div class="form-group">
                     <label class="control-label" for="name">settings</label>
                     <div class="controls">
-                        <textarea data-editor="javascript" class="form-control" name="settings"><%= JSON.stringify @template.settings, null, '\t' %></textarea>
+                        <textarea data-mode="json" data-theme="monokai" class="form-control" name="settings"><%= JSON.stringify @template.settings, null, '\t' %></textarea>
                         <p class="help-block">Settings object </p>
                     </div>
                 </div>
@@ -41,7 +38,7 @@
                 <div class="form-group">
                     <label class="control-label" for="source">Source</label>
                     <div class="controls">
-                        <textarea data-editor="javascript" class="form-control" id="source" name="source"><%= @template.source %></textarea>
+                        <textarea data-mode="javascript" data-theme="monokai" class="form-control" id="source" name="source"><%= @template.source %></textarea>
                     </div>
                 </div>
 
@@ -55,16 +52,24 @@
             </fieldset>
         </form>
         </div.col-md-10>
+</div>
+<% end %>
+
+<% block 'scripts' : %>
+<script src="/js/bundle.js"></script>
+<script src="/js/custom-editor.js"></script>
+
 <script type="text/javascript" charset="utf-8">
-    var ta = $('textarea[data-editor]');
+    var ta = $('textarea');
 
     TATransformer = ace.acequire('ace/ext/textarea');
     var settingsEditor = TATransformer.transformTextarea( ta[0] );
     var templateEditor = TATransformer.transformTextarea( ta[1] );
+    var options = { enableBasicAutocompletion: true, enableSnippets: true };
+    templateEditor.setOptions( options );
+    settingsEditor.setOptions( options );
 </script>
-</div>
 <% end %>
-
 
 
 
