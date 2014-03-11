@@ -1,7 +1,7 @@
 <% extend 'layout' %>
 
 <% block 'head' : %>
-<script src="/js/ace.js" type="text/javascript" charset="utf-8"></script>
+<script src="/js/bundle.js"></script>
 <% end %>
 
 <% block 'content' : %>
@@ -48,35 +48,11 @@
 
 <script type="text/javascript" charset="utf-8">
     // Hook up ACE editor to all textareas with data-editor attribute
-    $(function () {
-        $('textarea[data-editor]').each(function () {
-            var textarea = $(this);
- 
-            var mode = textarea.data('editor');
- 
-            var editDiv = $('<div>', {
-                position: 'absolute',
-                width: textarea.width(),
-                height: textarea.height(),
-                'class': textarea.attr('class')
-            }).insertBefore(textarea);
- 
-            textarea.css('visibility', 'hidden');
- 
-            var editor = ace.edit(editDiv[0]);
-            editor.renderer.setShowGutter(false);
-            editor.getSession().setValue(textarea.val());
-            editor.setTheme("ace/theme/monokai");
-            editor.getSession().setMode("ace/mode/" + mode);
-            // editor.setTheme("ace/theme/idle_fingers");
-            
-            // copy back to textarea on form submit...
-            textarea.closest('form').submit(function () {
-                textarea.val(editor.getSession().getValue());
-            })
- 
-        });
-    });
+    var ta = $('textarea[data-editor]');
+
+    TATransformer = ace.acequire('ace/ext/textarea');
+    var settingsEditor = TATransformer.transformTextarea( ta[0] );
+    var templateEditor = TATransformer.transformTextarea( ta[1] );
 </script>
 </div>
 <% end %>
