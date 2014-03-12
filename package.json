@@ -10,6 +10,7 @@
     "underscore": "*",
     "express": "3.1.0",
     "jade": "*",
+    "bootstrap-form-builder": "git+https://github.com/harish2704/bootstrap-from-builder",
     "express-resource": "git+https://github.com/harish2704/express-resource-simple",
     "ect": "*",
     "generic-paginate": "git+https://github.com/harish2704/generic-paginate.git"
