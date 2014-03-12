@@ -1,5 +1,14 @@
+var config = require('../config');
+var db = config.db;
 // require('tungus');
 var mongoose = require('mongoose');
 
-// mongoose.connect('tingodb://' + process.env.PWD + '/database');
-mongoose.connect('localhost', 'templates' );
+
+var url = 'mongodb://';
+if ( db.user ){
+    url  = url + db.user + ':' + db.password + '@';
+}
+url += db.host + '/' + db.database;
+
+console.log(  url );
+mongoose.connect( url );
