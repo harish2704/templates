@@ -3,7 +3,8 @@ module.exports = {
     {
         host: 'localhost',
         database: 'templates',
-        user: '',
-        password: 'password',
+        user: null,
+        port: null,
+        password: null,
     }
 };

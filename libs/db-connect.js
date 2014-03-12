@@ -8,7 +8,11 @@ var url = 'mongodb://';
 if ( db.user ){
     url  = url + db.user + ':' + db.password + '@';
 }
-url += db.host + '/' + db.database;
+url += db.host;
+if ( db.port ){
+    url += ':' + db.port;
+}
+url += '/' + db.database;
 
 console.log(  url );
 mongoose.connect( url );
