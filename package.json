@@ -6,6 +6,7 @@
     "start": "node app"
   },
   "dependencies": {
+    "mongoose": "*",
     "express": "3.1.0",
     "jade": "*",
     "express-resource": "git+https://github.com/harish2704/express-resource-simple",
