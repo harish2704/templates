@@ -62,12 +62,8 @@
 <script type="text/javascript" charset="utf-8">
     var ta = $('textarea');
 
-    TATransformer = ace.acequire('ace/ext/textarea');
-    var settingsEditor = TATransformer.transformTextarea( ta[0] );
-    var templateEditor = TATransformer.transformTextarea( ta[1] );
-    var options = { enableBasicAutocompletion: true, enableSnippets: true };
-    templateEditor.setOptions( options );
-    settingsEditor.setOptions( options );
+    var settingsEditor = createAceEditor( ta[0] );
+    var templateEditor = createAceEditor( ta[1] );
 </script>
 <% end %>
 

@@ -4,10 +4,8 @@
 <div class="row">
 <form class="form-horizontal" action="./" method="post" >
         <fieldset>
-
             <!-- Form Name -->
             <legend>Form Name</legend>
-
             <!-- Text input-->
             <div class="form-group">
                 <label class="control-label" for="name">name</label>
@@ -16,7 +14,6 @@
                     <p class="help-block">Name of template</p>
                 </div>
             </div>
-
             <div class="form-group">
                 <label class="control-label" for="name">settings</label>
                 <div class="controls">
@@ -24,7 +21,6 @@
                     <p class="help-block">Settings object </p>
                 </div>
             </div>
-
             <!-- Textarea -->
             <div class="form-group">
                 <label class="control-label" for="source">Source</label>
@@ -32,13 +28,11 @@
                     <textarea data-mode="javascript" data-theme="monokai" rows="4" class="form-control" name="source"></textarea>
                 </div>
             </div>
-
             <div class="form-group">
                 <div class="controls">
                     <button id="singlebutton" name="singlebutton" class="btn btn-primary">Save</button>
                 </div>
             </div>
-
         </fieldset>
     </form>
 </div>
@@ -50,15 +44,10 @@
 <script src="/js/custom-editor.js"></script>
 
 <script type="text/javascript" charset="utf-8">
-    // Hook up ACE editor to all textareas with data-editor attribute
     var ta = $('textarea');
 
-    TATransformer = ace.acequire('ace/ext/textarea');
-    var settingsEditor = TATransformer.transformTextarea( ta[0] );
-    var templateEditor = TATransformer.transformTextarea( ta[1] );
-    var options = { enableBasicAutocompletion: true, enableSnippets: true };
-    templateEditor.setOptions( options );
-    settingsEditor.setOptions( options );
+    var settingsEditor = createAceEditor( ta[0] );
+    var templateEditor = createAceEditor( ta[1] );
 </script>
 
 <% end %>

@@ -11,7 +11,7 @@
             <%- @bootstrap3 @template.settings %>
         </div>
         <div class="row col-md-8">
-            <textarea  data-mode="javascript" data-theme="monokai" name="code" id="taIdCode" rows="8" cols="40"></textarea>
+            <textarea class="form-control" data-mode="javascript" data-theme="monokai" name="code" id="taIdCode" rows="25" ></textarea>
         </div>
     </div>
 </div>
@@ -34,8 +34,7 @@
     var renderer = new ect({root: templates });
 
     var TAEdit = $('#taIdCode');
-    TATransformer = ace.acequire('ace/ext/textarea');
-    var editor = TATransformer.transformTextarea( TAEdit[0] );
+    var editor = createAceEditor( TAEdit[0] );
 
     settingsForm = $("#settingsForm > form");
     settingsForm.submit( function(e){
