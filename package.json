@@ -3,7 +3,11 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node app"
+    "build-js": "browserify   ./public/client-bundle.js > public/js/bundle.js",
+    "build": "npm run build-js",
+    "make": "make",
+    "prestart": "npm run make",
+    "start": "node server.js"
   },
   "dependencies": {
     "mongoose": "*",
