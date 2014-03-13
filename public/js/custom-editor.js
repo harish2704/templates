@@ -3,7 +3,7 @@ ace.acequire('ace/ext/searchbox');
 
 var customEditorOptions = {
     enableBasicAutocompletion: true,
-    enableSnippets: false,
+    enableSnippets: true,
     behavioursEnabled: true,
     maxLines: 30
 };
