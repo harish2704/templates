@@ -2,7 +2,8 @@
 
 <% block 'content' : %>
 <div class="row">
-<form class="form-horizontal" action="./" method="post" >
+<form class="form-horizontal" action="./" method="post" name="TemplateForm" >
+    <input type="hidden" name="lang"  />
         <fieldset>
             <!-- Form Name -->
             <legend>Form Name</legend>
@@ -25,7 +26,7 @@
             <div class="form-group">
                 <label class="control-label" for="source">Source</label>
                 <div class="controls">
-                    <textarea data-mode="javascript" data-theme="monokai" rows="4" class="form-control" name="source"></textarea>
+                    <textarea data-theme="monokai" rows="4" class="form-control" name="source"></textarea>
                 </div>
             </div>
             <div class="form-group">
@@ -48,6 +49,10 @@
 
     var settingsEditor = createAceEditor( ta[0] );
     var templateEditor = createAceEditor( ta[1] );
+    var form = $(document.forms.TemplateForm);
+    form.submit( function(e){
+        form[0].lang.value = templateEditor.getOptions().mode;
+    });
 </script>
 
 <% end %>

@@ -75,7 +75,7 @@ exports.edit = function( req, res ){
 
 exports.update = function( req, res ){
     var id = req.params.template;
-    var data = _.pick( req.body, 'name', 'source', 'settings' );
+    var data = _.pick( req.body, 'name', 'source', 'settings', 'lang' );
     if ( typeof data.settings === 'string' ){
         try{
             data.settings = JSON.parse( data.settings );

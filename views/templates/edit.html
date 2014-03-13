@@ -9,8 +9,9 @@
         <a class="btn btn-success glyphicon glyphicon-th-list" href="<%- @templateUrl @template %>">View</a>
     </div>
     <div class="col-md-10">
-        <form class="form-horizontal" action="./" method="post" >
+        <form class="form-horizontal" action="./" method="post" name="TemplateForm" >
             <input type="hidden" name="_method"  value="put" />
+            <input type="hidden" name="lang"  value="<%- @template.lang %>" />
             <fieldset>
 
                 <!-- Form Name -->
@@ -38,7 +39,7 @@
                 <div class="form-group">
                     <label class="control-label" for="source">Source</label>
                     <div class="controls">
-                        <textarea data-mode="javascript" data-theme="monokai" class="form-control" id="source" name="source"><%= @template.source %></textarea>
+                        <textarea data-mode="<%- @template.lang %>" data-theme="monokai" class="form-control" id="source" name="source"><%= @template.source %></textarea>
                     </div>
                 </div>
 
@@ -64,6 +65,11 @@
 
     var settingsEditor = createAceEditor( ta[0] );
     var templateEditor = createAceEditor( ta[1] );
+
+    var form = $(document.forms.TemplateForm);
+    form.submit( function(e){
+        form[0].lang.value = templateEditor.getOptions().mode;
+    });
 </script>
 <% end %>
 

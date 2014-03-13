@@ -8,8 +8,10 @@ var Schema = mongoose.Schema;
 
 var templateSchema = Schema({
     name: String,
-    source : String,
-    settings : {type: Schema.Types.Mixed }
+    lang: {type: String, default: 'text'},
+    snippets: String,
+    source: String,
+    settings: {type: Schema.Types.Mixed }
 });
 
-module.exports = mongoose.model( 'Template', templateSchema );
+module.exports = mongoose.model('Template', templateSchema );

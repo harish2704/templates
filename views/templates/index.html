@@ -13,6 +13,7 @@
                 <tr>
                     <th>Id</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -21,6 +22,7 @@
                 <tr>
                     <td><%- template._id %></td>
                     <td><%- template.name %></td>
+                    <td><%- template.lang %></td>
                     <td>
                         <a class="glyphicon glyphicon-th-list text-success" href="<%- @templateUrl template %>"> </a>
                         <a class="glyphicon glyphicon-pencil text-warning" href="<%- @templateUrl template %>/edit"></a>
