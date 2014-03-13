@@ -13,6 +13,8 @@ require('brace');
 require('brace/misc/keybinding-vim');
 require('brace/misc/ext-language_tools');
 require('brace/misc/ext-textarea');
+require('brace/misc/ext-searchbox');
+require('brace/misc/ext-settings_menu');
 
 
 // require("brace/theme/ambiance");
