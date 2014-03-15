@@ -1,6 +1,6 @@
-NPM_PATHS = $(shell npm bin);
+NPM_PATHS =$(shell npm bin)
 
-PATH += $(NPM_PATHS)
+export PATH +=:$(NPM_PATHS)
 $(info $(PATH) )
 
 all: public/js/bundle.js
