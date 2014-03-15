@@ -20,5 +20,16 @@
     "express-resource": "git+https://github.com/harish2704/express-resource-simple",
     "ect": "*",
     "generic-paginate": "git+https://github.com/harish2704/generic-paginate.git"
-  }
+  },
+  "description": "simple code template or snippets manager written in node.js",
+  "keywords": ["snippet manager", "templates",  "reuse", "express", "ect"],
+  "author":{
+		"name" : "Harish.K",
+		"email" : "harish2704@gmail.com",
+		"url" : "harish2704.tk"
+	},
+	"repository" :{
+		"type" : "git",
+		"url" : "https://github.com/harish2704/templates.git"
+	}
 }
