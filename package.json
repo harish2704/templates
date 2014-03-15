@@ -1,7 +1,6 @@
 {
-  "name": "Templates",
+  "name": "code-templates",
   "version": "0.0.1",
-  "private": true,
   "scripts": {
     "build-js": "browserify   ./public/client-bundle.js > public/js/bundle.js",
     "build": "npm run build-js",
