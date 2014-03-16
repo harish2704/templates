@@ -15,7 +15,7 @@
     "browserify": "3.0.0",
     "express": "3.1.0",
     "jade": "*",
-    "bootstrap-form-builder": "git+https://github.com/harish2704/bootstrap-from-builder",
+    "bootstrap-form-builder": "git+https://github.com/harish2704/bootstrap-from-builder#2bdd7adff4a0ee3b94059e32214a16c17d75d65e",
     "express-resource": "git+https://github.com/harish2704/express-resource-simple",
     "ect": "*",
     "generic-paginate": "git+https://github.com/harish2704/generic-paginate.git"
