@@ -70,12 +70,22 @@ xdg-open http://localhost:3000;
         'parameter-name' : 'type'
     }
     ```
+    OR
+    ```
+    {
+        'parameter-name' : {
+            "type" :"type",
+            "optionName" : "optionValue"
+        }
+    }
+    ```
 
     available types
 
         'string' => textbox
         'number' => textbox
         'boolean' => checkbox 
+        'select' => select 
 
 * Template 
 
