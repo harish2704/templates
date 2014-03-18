@@ -32,6 +32,16 @@
             </tbody>
         </table>
     </div>
+
+    <div class="row">
+        <ul class="pagination">
+            <li><a href="/templates?page=1">&laquo;</a></li>
+            <% for page, className of @pagination.range : %>
+            <li class="<%= className %>"><a href="/templates?page=<%= page %>"><%= page %></a></li>
+            <% end %>
+            <li><a href="/templates?page=<%= @pagination.total %>">&raquo;</a></li>
+        </ul>
+    </div>
 </div>
 <% end %>
 
