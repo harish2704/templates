@@ -57,8 +57,8 @@ exports.show = function( req, res ){
 exports.destroy = function( req, res ){
     var id = req.params.template;
 
-    return Template.destroyById( id , function( err  ){
-        return res.render( 'templates/destroy', { _code: !err } );
+    return Template.remove( {_id: id }, function( err  ){
+        return res.redirect( 'back', { _code: !err } );
     });
 };
 
