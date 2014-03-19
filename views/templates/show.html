@@ -33,8 +33,10 @@
     var _ = require('underscore'),
     ect = require('ect');
     var templates = templates || {};
+    var openTag = '<%- @template.openTag %>';
+    var closeTag = '<%- @template.closeTag %>';
     templates.page = $('#template').html();
-    var renderer = new ect({root: templates });
+    var renderer = new ect({root: templates, open: openTag, close: closeTag });
 
     var TAEdit = $('#taIdCode');
     var editor = createAceEditor( TAEdit[0] );

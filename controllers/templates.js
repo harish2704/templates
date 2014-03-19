@@ -1,7 +1,7 @@
 var Template = require('../models/Template'),
     _ = require('underscore'),
     formBuilder = require('bootstrap-form-builder'),
-    paginator = require('generic-paginate')( {defaults:{ size: 5 }});
+    paginator = require('generic-paginate')( {defaults:{ size: 10 }});
 
 exports.index = function(req, res ) {
 
@@ -75,7 +75,7 @@ exports.edit = function( req, res ){
 
 exports.update = function( req, res ){
     var id = req.params.template;
-    var data = _.pick( req.body, 'name', 'source', 'settings', 'lang' );
+    var data = _.pick( req.body, 'name', 'source', 'settings', 'lang', 'openTag', 'closeTag' );
     if ( typeof data.settings === 'string' ){
         try{
             data.settings = JSON.parse( data.settings );

@@ -11,6 +11,8 @@ var templateSchema = Schema({
     lang: {type: String, default: 'text'},
     snippets: String,
     source: String,
+    openTag: { type: String, default: '<%' },
+    closeTag: { type: String, default: '%>' },
     settings: {type: Schema.Types.Mixed }
 });
 

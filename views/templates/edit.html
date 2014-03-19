@@ -19,6 +19,20 @@
 
                 <!-- Text input-->
                 <div class="form-group">
+                    <label class="control-label" for="openTag">openTag</label>
+                    <div class="controls">
+                        <input name="openTag" type="text"  class="input-small form-control" required="" value="<%- @template.openTag %>">
+                        <p class="help-block">Open Tag</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="closeTag">closeTag</label>
+                    <div class="controls">
+                        <input name="closeTag" type="text"  class="input-small form-control" required="" value="<%- @template.closeTag %>">
+                        <p class="help-block">close Tag</p>
+                    </div>
+                </div>
+                <div class="form-group">
                     <label class="control-label" for="name">name</label>
                     <div class="controls">
                         <input id="name" name="name" type="text" placeholder="Name" class="input-xlarge form-control" required="" value="<%= @template.name %>">
