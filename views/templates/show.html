@@ -39,7 +39,11 @@
     var renderer = new ect({root: templates, open: openTag, close: closeTag });
 
     var TAEdit = $('#taIdCode');
-    var editor = createAceEditor( TAEdit[0] );
+    var editorOpts = {
+        openTag: openTag,
+         closeTag: closeTag
+    };
+    var editor = createAceEditor( TAEdit[0] , editorOpts );
 
     settingsForm = $("#settingsForm > form");
     settingsForm.submit( function(e){

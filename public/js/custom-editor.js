@@ -51,7 +51,15 @@ var customEditorOptions = {
 };
 
 var TATransformer = ace.acequire('ace/ext/textarea');
-var createAceEditor = function( elem ){
+var createAceEditor = function( elem, options ){
+    options = options || {};
+    var openTag = options.openTag;
+    var closeTag = options.closeTag;
+    var customSnippets = ectSnippets;
+    if ( openTag ){
+        customSnippets = customSnippets.replace( /<%/g, openTag );
+        customSnippets = customSnippets.replace( /%>/g, closeTag );
+    }
     elem.style.height = elem.scrollHeight + 'px';
     var editor = TATransformer.transformTextarea( elem );
     editor.setOptions( customEditorOptions );
@@ -59,7 +67,7 @@ var createAceEditor = function( elem ){
     sb.hide();
     var mode = editor.getSession().getMode().$id;
     var snip = snippetManager.files[mode];
-    var snippets = snippetManager.parseSnippetFile( ectSnippets, snip.mode );
+    var snippets = snippetManager.parseSnippetFile( customSnippets, snip.mode );
     snippetManager.register( snippets );
 
     return editor;
