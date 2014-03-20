@@ -3,6 +3,25 @@ var Template = require('../models/Template'),
     formBuilder = require('bootstrap-form-builder'),
     paginator = require('generic-paginate')( {defaults:{ size: 10 }});
 
+function processData( data ){
+
+    if ( typeof data.settings === 'string' ){
+        try{
+            data.settings = JSON.parse( data.settings );
+        }
+        catch( e ){
+            data.settings = {};
+        }
+    }
+    if( ! data.openTag ){
+        data.openTag = '<%';
+    }
+    if( ! data.closeTag ){
+        data.closeTag = '%>';
+    }
+    return data;
+}
+
 exports.index = function(req, res ) {
 
     Template.count( {}, function( err, count ){
@@ -27,16 +46,7 @@ exports.load = function( id, req, res, next ){
 exports.create = function( req, res ){
 
     var userData = req.body;
-    if ( typeof userData.settings === 'string' ){
-        try{
-            userData.settings = JSON.parse( userData.settings );
-        }
-        catch( e ){
-            userData.settings = {};
-        }
-
-    }
-
+    userData = processData( userData );
     var template = new Template( userData );
     return template.save( function( err, template ){
         if( err ){
@@ -76,15 +86,7 @@ exports.edit = function( req, res ){
 exports.update = function( req, res ){
     var id = req.params.template;
     var data = _.pick( req.body, 'name', 'source', 'settings', 'lang', 'openTag', 'closeTag' );
-    if ( typeof data.settings === 'string' ){
-        try{
-            data.settings = JSON.parse( data.settings );
-        }
-        catch( e ){
-            data.settings = {};
-        }
-    }
-
+    data = processData(data );
     return Template.findById( id , function( err, template ){
         template = _.extend( template, data );
         return template.save( function( err, template ){
