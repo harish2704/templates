@@ -13,6 +13,7 @@ function processData( data ){
             data.settings = {};
         }
     }
+    data.settings = data.settings || {};
     if( ! data.openTag ){
         data.openTag = '<%';
     }
@@ -24,14 +25,22 @@ function processData( data ){
 
 exports.index = function(req, res ) {
 
-    Template.count( {}, function( err, count ){
+    var kw = req.query.keyword;
+    var conditions = {};
+    if ( kw ){
+        conditions.name = {
+            '$regex' : ".*" + kw + ".*",
+            '$options': 'i'
+        };
+    }
+    Template.count( conditions, function( err, count ){
         var paginationParams = {};
         paginationParams.count = count;
         paginationParams.page = req.query.page;
 
         var pagination = paginator.paginate( paginationParams );
 
-        return Template.find({}).skip(pagination.start-1).limit( paginator.defaults.size).exec(function( err, templates ){
+        return Template.find(conditions).skip(pagination.start-1).limit( paginator.defaults.size).exec(function( err, templates ){
             return res.render('templates/index', { templates: templates, pagination: pagination });
         });
     });

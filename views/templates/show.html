@@ -18,6 +18,11 @@
         </div>
     </div>
 </div>
+<div class="clear"></div>
+<div class="row">
+<form role="form" id="previewForm" >
+</form>
+</div>
 <script type="text/html" id="template" charset="utf-8"><%- @template.source %></script>
 
 
@@ -44,6 +49,7 @@
          closeTag: closeTag
     };
     var editor = createAceEditor( TAEdit[0] , editorOpts );
+    previewForm = $('#previewForm');
 
     settingsForm = $("#settingsForm > form");
     settingsForm.submit( function(e){
@@ -51,8 +57,16 @@
         var data = settingsForm.toObject();
         data = _.defaults( data, require('./js/client-helpers') )
         editor.setValue( renderer.render('page', data ) );
-    editor.clearSelection();
-    })
+        editor.clearSelection();
+    });
+var addForm = function( elem, name ){
+    var mainContailner = $(elem.parentNode);
+    var formNo = mainContailner.find('fieldset').length;
+    var html = generator[name].call( formNo, {}, {}, {} );
+    mainContailner.append( html );
+    return false;
+}
+    var sett = <%- JSON.stringify @template.settings, null, '\t' %>;
 </script>
 
 <% end %>

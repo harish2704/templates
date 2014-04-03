@@ -3,6 +3,16 @@
 <% block 'content' : %>
 <div class="row">
     <div class="row">
+        <div class="row">
+            <form action="" method="get" accept-charset="utf-8" role="form" class="form-inline">
+                <div class="input-group">
+                    <input id="inputSearch" name="keyword" class="input- form-control" placeholder="Search" type="text">
+                    <span class="input-group-btn">
+                        <button type="submit" class="btn btn-default">Search</button> 
+                    </span>
+                </div>
+            </form>
+        </div>
         <div class="form-group">
             <a href="/templates/new" class="glyphicon glyphicon-plus btn btn-success">New</a>
         </div>
@@ -20,7 +30,7 @@
             <tbody>
                 <% for template in @templates : %>
                 <tr>
-                    <td><%- template._id %></td>
+                    <td><a href="<%- @templateUrl template %>"><%- template._id %></a></td>
                     <td><%- template.name %></td>
                     <td><%- template.lang %></td>
                     <td>
