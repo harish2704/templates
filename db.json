@@ -1,0 +1,65 @@
+{
+  "templates": [
+    {
+      "id": 1,
+      "name": "First template",
+      "template": "Heloo <%= name %>",
+      "schema": {
+        "title": "Enter name",
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Your name"
+          }
+        }
+      },
+      "syntax": "javascript"
+    },
+    {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "title": "Your name",
+            "type": "string"
+          }
+        }
+      },
+      "template": "Heloo <%= name %> ",
+      "id": 2,
+      "name": "Test template2",
+      "syntax": "javascript"
+    },
+    {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "msg": {
+            "title": "Message",
+            "type": "string"
+          }
+        }
+      },
+      "template": "\n\nconsole.log( <%= msg %> )",
+      "name": "Full template",
+      "syntax": "javascript",
+      "id": 3
+    },
+    {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "msg": {
+            "title": "Message",
+            "type": "string"
+          }
+        }
+      },
+      "template": "<%\nfunction capitalize( str ){\n    return str[0].toUpperCase() + str.slice(1);\n}\n%>\n\n\nconsole.log( \"<%= capitalize(msg) %>\");",
+      "name": "ttt",
+      "syntax": "javascript",
+      "id": 4
+    }
+  ]
+}

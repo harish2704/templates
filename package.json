@@ -2,33 +2,65 @@
   "name": "code-templates",
   "version": "0.0.1",
   "scripts": {
-    "build-js": "browserify   ./public/client-bundle.js > public/js/bundle.js",
-    "build": "npm run build-js",
-    "make": "make",
-    "prestart": "npm run make",
-    "start": "node server.js"
+    "start-api": "json-server ./db.json",
+    "start": "node server.js",
+    "lint": "eslint src"
+  },
+  "bin": {
+    "node-templates": "./bin/node-templates.js"
+  },
+  "devDependencies": {
+    "babel-core": "^6.0.20",
+    "babel-eslint": "^4.1.3",
+    "babel-loader": "^6.0.1",
+    "babel-plugin-add-module-exports": "^0.1.2",
+    "babel-preset-es2015": "^6.0.15",
+    "babel-preset-react": "^6.0.15",
+    "babel-preset-stage-0": "^6.0.15",
+    "eslint": "^1.10.3",
+    "eslint-plugin-react": "^3.6.2",
+    "react-hot-loader": "^1.3.0",
+    "webpack": "^1.12.2",
+    "webpack-dev-server": "^1.12.1"
   },
   "dependencies": {
-    "mongoose": "*",
-    "underscore": "*",
-    "lingo": "*",
-    "browserify": "3.0.0",
-    "express": "3.1.0",
-    "jade": "*",
-    "bootstrap-form-builder": "git+https://github.com/harish2704/bootstrap-from-builder#2d03a2dde714f482c07064b823ebede2c3b7d41d",
-    "express-resource": "git+https://github.com/harish2704/express-resource-simple",
-    "ect": "*",
-    "generic-paginate": "git+https://github.com/harish2704/generic-paginate.git"
+    "babel-plugin-transform-export-extensions": "^6.5.0",
+    "bootstrap": "^3.3.6",
+    "brace": "^0.8.0",
+    "css-loader": "^0.23.1",
+    "ejs": "^2.4.1",
+    "file-loader": "^0.8.5",
+    "json-loader": "^0.5.4",
+    "json-server": "^0.8.9",
+    "less": "^2.6.1",
+    "less-loader": "^2.2.3",
+    "react": "^0.14.6",
+    "react-ace": "^3.4.1",
+    "react-dom": "^0.14.6",
+    "react-hot-loader": "^1.3.0",
+    "react-jsonschema-form": "^0.29.1",
+    "react-router": "^2.0.1",
+    "style-loader": "^0.13.1",
+    "urijs": "^1.17.1",
+    "url-loader": "^0.5.7",
+    "webpack-hot-middleware": "^2.10.0",
+    "whatwg-fetch": "^1.0.0"
   },
   "description": "simple code template or snippets manager written in node.js",
-  "keywords": ["snippet manager", "templates",  "reuse", "express", "ect"],
-  "author":{
-		"name" : "Harish.K",
-		"email" : "harish2704@gmail.com",
-		"url" : "harish2704.tk"
-	},
-	"repository" :{
-		"type" : "git",
-		"url" : "https://github.com/harish2704/templates.git"
-	}
+  "keywords": [
+    "snippet manager",
+    "templates",
+    "reuse",
+    "express",
+    "ect"
+  ],
+  "author": {
+    "name": "Harish.K",
+    "email": "harish2704@gmail.com",
+    "url": "harish2704.tk"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harish2704/templates.git"
+  }
 }
