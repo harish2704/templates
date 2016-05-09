@@ -39,7 +39,9 @@ let formCreatorSchema = {
           }
         }
       } 
-    } } }
+    }
+  }
+};
 
 
 export default class FormCreator extends Component {
