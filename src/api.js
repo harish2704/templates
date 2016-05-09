@@ -23,7 +23,7 @@ class Api{
       },
     }
 
-    if( method == 'POST' ){
+    if(  [ 'POST', 'PUT', 'PATH' ].indexOf( method ) > -1 ){
       opts.body = JSON.stringify( data );
     }
 
@@ -48,6 +48,10 @@ class Api{
 
   saveTemplate( data ){
     return this.request( '/templates', 'POST', data );
+  }
+
+  updateTemplate( id, data ){
+    return this.request( '/templates/' + id, 'PUT', data )
   }
 
 }

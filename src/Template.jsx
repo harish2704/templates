@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 
 import Api from './api';
 import TemplateViewer from './TemplateViewer';
@@ -24,7 +25,16 @@ export default class App extends Component {
 
   render() {
     if( this.state.template ){
-      return ( <TemplateViewer template={this.state.template} width="12" formWidth="4" editorWidth="8" /> );
+      return ( 
+        <div className="row">
+          <div className="col-md-12">
+            <Link className="btn btn-warning" to={'/templates/' + this.state.template.id + '/edit'}>Edit</Link>
+            <br/>
+            <br/>
+          </div>
+          <TemplateViewer template={this.state.template} width="12" formWidth="4" editorWidth="8" />
+        </div>
+        );
     } else {
       return ( <p className="loading" >Loading...</p> );
     }

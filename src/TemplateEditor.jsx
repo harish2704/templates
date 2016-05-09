@@ -20,10 +20,46 @@ export default class TemplateEditor extends Component {
     super();
     this.state = {
       createdSchema: {},
-      createdData: {},
       currentFormData: {},
       template: ''
+    };
+  }
+
+
+  componentWillReceiveProps( nextProps ){
+    if( nextProps.template ){
+      this.setStateFromExisting( nextProps.template );
     }
+  }
+
+  componentDidMount(){
+    if( this.props.template ){
+      this.setStateFromExisting( this.props.template );
+    }
+  }
+
+  setStateFromExisting( template ){
+    var currentFormData = {},
+        props;
+
+    props = template.schema.properties;
+
+    currentFormData.name = template.name;
+    currentFormData.syntax = template.syntax;
+    currentFormData.fields = Object.keys( props ).map((key) => {
+      let val = props[key];
+      return {
+        name: key,
+        title: val.title,
+        type: val.type
+      };
+    });
+
+    this.setState({
+      createdSchema: template.schema,
+      currentFormData: currentFormData,
+      template: template.template,
+    });
   }
 
   updateTemplate( newVal ){

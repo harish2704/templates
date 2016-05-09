@@ -13,5 +13,6 @@ ReactDOM.render((
     <Route path="/templates" component={TemplateList} />
     <Route path="/templates/new" component={TemplateCreator} />
     <Route path="/templates/:templateId" component={Template} />
+    <Route path="/templates/:templateId/edit" component={TemplateCreator} />
   </Router>
 ), document.getElementById('root') )

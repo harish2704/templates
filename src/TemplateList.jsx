@@ -43,6 +43,7 @@ export default class TemplateList extends Component {
                   <Link to={ '/templates/' + item.id } >
                     {item.name}
                   </Link>
+                  <Link className="badge warning pull-right" to={'/templates/' + item.id + '/edit'}>Edit</Link>
                 </div>
               </div>
             </li>
