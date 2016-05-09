@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
-import brace from 'brace';
+import Form from 'react-jsonschema-form';
 import AceEditor from 'react-ace';
-import Ejs from 'ejs'
-
 import 'brace/mode/javascript';
 import 'brace/theme/monokai';
-import 'brace/ext/searchbox';
-// import 'brace/ext/language_tools';
 
 import Panel from './Panel';
+import formCreatorSchema from './form-creator-schema';
+
+
+let formStyle = {
+  overflow: 'auto',
+  height: '220px',
+};
 
 
 export default class TemplateEditor extends Component {
@@ -16,60 +19,71 @@ export default class TemplateEditor extends Component {
   constructor(){
     super();
     this.state = {
-      template: '',
-      renderedTemplate: ''
-    };
-  }
-
-  componentWillReceiveProps(){
-
-    var rendered = this.state.renderedTemplate;
-    try {
-      rendered = ejs.render( this.state.template, this.props.sampleData );
-      this.setState({
-        renderedTemplate: rendered,
-      });
-    } catch( e ){
-      console.log( 'Error template ' );
+      createdSchema: {},
+      createdData: {},
+      currentFormData: {},
+      template: ''
     }
   }
 
-  updateTemplateVal( newVal ){
+  updateTemplate( newVal ){
     this.setState({
-      template: newVal
+      template: newVal,
     });
-    this.props.onChange( newVal );
+
+    this.props.onTemplateChange( newVal );
+  }
+
+  updateSchema( form ){
+    var formProperties = {};
+    form.formData.fields.forEach(( item ) => {
+      formProperties[item.name] = {
+        title: item.title,
+        type: item.type
+      };
+    });
+
+    var createdSchema = {
+      type: 'object',
+      properties: formProperties
+    };
+
+    this.setState({
+      createdSchema: createdSchema,
+      currentFormData: form.formData,
+    });
+
+    this.props.onSchemaChange({
+      name: form.formData.name,
+      syntax: form.formData.syntax,
+      schema: createdSchema
+    });
   }
 
   render(){
     return(
-      <div className="col-md-12">
-        <div className="col-md-6">
-          <Panel type="warning" title="Enter your template" >
-            <AceEditor
-              mode="javascript"
-              theme="monokai"
-              name="main-editor"
-              editorProps={{
-                $blockScrolling: Infinity,
-              }}
-              onChange={this.updateTemplateVal.bind(this)}
-              value={this.state.template}
-            />
-          </Panel>
-        </div>
-
-        <div className="col-md-6">
-          <Panel type="success" title="Preview of rendered text">
-            <AceEditor
-              mode="javascript"
-              theme="monokai"
-              name="previe-editor"
-              editorProps={{$blockScrolling: Infinity }}
-              value={this.state.renderedTemplate}
-            />
-          </Panel>
-        </div>
+      <div className={'col-md-' + this.props.width}  >
+        <Panel type="warning" title="Data Form Defnition" width={this.props.formWidth} className="pnl-create-form" >
+          <Form 
+            style={formStyle}
+            schema={formCreatorSchema}
+            formData={this.state.currentFormData}
+            onSubmit={this.updateSchema.bind(this)} >
+            <button className="btn btn-success" type="submit" >Preview Form</button>
+          </Form>
+        </Panel>
+        <Panel type="success" title="Template Text to be rendered" width={this.props.editorWidth}  >
+          <AceEditor
+            mode={this.state.currentFormData.syntax}
+            theme="monokai"
+            fontSize={14}
+            name="main-editor"
+            editorProps={{$blockScrolling: Infinity }}
+            width={null}
+            onChange={this.updateTemplate.bind(this)}
+            value={this.state.template}
+          />
+        </Panel>
       </div>
     );
   }

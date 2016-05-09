@@ -24,7 +24,7 @@ export default class App extends Component {
 
   render() {
     if( this.state.template ){
-      return ( <TemplateViewer template={this.state.template} /> );
+      return ( <TemplateViewer template={this.state.template} width="12" formWidth="4" editorWidth="8" /> );
     } else {
       return ( <p className="loading" >Loading...</p> );
     }

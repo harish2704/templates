@@ -1,15 +1,7 @@
 import React, { Component } from 'react';
-import Form from 'react-jsonschema-form';
-import brace from 'brace';
-import AceEditor from 'react-ace';
-import Ejs from 'ejs';
 
-import 'brace/mode/javascript';
-import 'brace/theme/monokai';
-
-import FormCreator from './FormCreator';
 import TemplateEditor from './TemplateEditor';
-
+import TemplateViewer from './TemplateViewer';
 import Api from './api';
 
 
@@ -18,34 +10,42 @@ export default class TemplateCreator extends Component {
   constructor(){
     super();
     this.state = {
-      sampleData : {}
+      createdTemplate: {
+        schema: {}
+      }
     };
+
+    this.setSchema = this.setSchema.bind(this);
+    this.setTemplate = this.setTemplate.bind(this);
+    this.saveTemplate = this.saveTemplate.bind(this);
   }
 
-  testForm( formData ){
+  setSchema( data ){
     this.setState({
-      sampleData: formData
+      createdTemplate: {
+        name: data.name,
+        syntax: data.syntax,
+        schema: data.schema,
+        template: this.state.createdTemplate.template,
+      }
     });
   }
 
-  saveFormToState( data ){
-    this.setState( data );
-  }
-
-  saveTemplateToState( template ){
+  setTemplate( template ){
+    console.log( 'Setting template' );
+    let createdTemplate = this.state.createdTemplate;
     this.setState({
-      template: template
-    })
+      createdTemplate: {
+        name: createdTemplate.name,
+        syntax: createdTemplate.syntax,
+        schema: createdTemplate.schema,
+        template: template
+      }
+    });
   }
 
   saveTemplate(){
-    console.log( 'This is state', this.state );
-    Api.saveTemplate({
-      schema: this.state.schema,
-      template: this.state.template,
-      name: this.state.name,
-      syntax: this.state.syntax,
-    })
+    Api.saveTemplate( this.state.createdTemplate )
     .then( (res) => {
       console.log( 'Template saved', res );
     });
@@ -54,8 +54,8 @@ export default class TemplateCreator extends Component {
   render(){
     return(
       <div className="row">
-        <FormCreator onTestForm={this.testForm.bind(this)} onPreviewForm={this.saveFormToState.bind(this)} />
-        <TemplateEditor sampleData={this.state.sampleData} onChange={this.saveTemplateToState.bind(this)} />
+        <TemplateEditor onSchemaChange={this.setSchema} onTemplateChange={this.setTemplate} width="6" formWidth="12" editorWidth="12" />
+        <TemplateViewer template={this.state.createdTemplate} width="6" formWidth="12" editorWidth="12" />
         <div className="col-md-12">
           <button className="btn btn-success" onClick={this.saveTemplate.bind(this)}>Save Template</button>
         </div>

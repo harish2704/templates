@@ -6,6 +6,7 @@ import TemplateList from './TemplateList';
 import TemplateCreator from './TemplateCreator';
 
 import 'bootstrap/dist/css/bootstrap.css'
+import './app.css'
 
 ReactDOM.render((
   <Router history={ browserHistory }>

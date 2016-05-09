@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Form from 'react-jsonschema-form';
-import brace from 'brace';
 import AceEditor from 'react-ace';
 import Ejs from 'ejs'
 
@@ -9,41 +8,64 @@ import 'brace/theme/monokai';
 
 import Panel from './Panel';
 
-export default class App extends Component {
+export default class TemplateViewer extends Component {
 
   constructor(){
     super();
     this.state = {
       renderedTxt: '',
-      formData: {}
+      formData: null,
     };
   }
 
-  renderTemplate( form ){
-    var renderedTxt = ejs.render( this.props.template.template, form.formData );
+  updateRenderedTempalte( formData ){
+    var templateStr = this.props.template.template,
+        renderedTxt;
+
     this.setState({
-      renderedTxt: renderedTxt,
-      formData: form.formData,
+      formData: formData,
     });
+    try{
+      if( templateStr ){
+        renderedTxt = ejs.render( templateStr, formData );
+        this.setState({
+          renderedTxt: renderedTxt,
+        });
+      }
+    } catch( e ){
+      console.log( e );
+    }
+  }
+
+  renderTemplate( form ){
+    this.updateRenderedTempalte( form.formData );
+  }
+
+
+  componentWillReceiveProps( nextProps ){
+    console.log( 'recieving props...' );
+    if( this.state.formData ){
+      this.updateRenderedTempalte( this.state.formData );
+    }
   }
 
   render() {
     let template = this.props.template;
 
     return ( 
-      <div className="col-md-12">
-        <Panel title="Data" type="success" width="4" >
+      <div className={'col-md-' + this.props.width}>
+        <Panel title="Data Form" type="warning" width={this.props.formWidth} className="pnl-create-form" >
           <Form schema={template.schema} onSubmit={this.renderTemplate.bind(this)} formData={this.state.formData} >
             <button className="btn btn-success" type="submit" >Apply</button>
           </Form>
         </Panel>
-        <Panel title="Output" type="default" width="8" >
+        <Panel title="Rendered output" type="success" width={this.props.editorWidth}  >
           <AceEditor
             mode={template.syntax}
-            fontSize="14"
-            width="650"
+            fontSize={14}
             theme="monokai"
             name="show-template"
+            width={null}
             editorProps={{$blockScrolling: Infinity }}
             value={this.state.renderedTxt}
           />
@@ -53,4 +75,6 @@ export default class App extends Component {
   }
 }
 
-
+TemplateViewer.defaultProps = {
+  template: {}
+};
