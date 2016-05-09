@@ -60,6 +60,59 @@
       "name": "ttt",
       "syntax": "javascript",
       "id": 4
+    },
+    {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "msg": {
+            "title": "Message text",
+            "type": "string"
+          },
+          "name": {
+            "title": "Your name",
+            "type": "string"
+          }
+        }
+      },
+      "template": "/* Hello <%= name %>  */\n\nconsole.log('<%= msg %>')",
+      "name": "Test template",
+      "syntax": "javascript",
+      "id": 5
+    },
+    {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "title": "Component name",
+            "type": "string"
+          }
+        }
+      },
+      "template": "<%\nfunction capitalize( str ){\n    return str[0].toUpperCase() + str.slice(1);\n}\n%>\n\n\nexport default class <%= capitalize( name ) %> {\n\n    \n}",
+      "name": "React class",
+      "syntax": "javascript",
+      "id": 6
+    },
+    {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "title": "Name of your model",
+            "type": "string"
+          },
+          "sample": {
+            "title": "Sample data(JSON)",
+            "type": "string"
+          }
+        }
+      },
+      "template": "<%\nfunction capitalize( str ){\n    return str[0].toUpperCase() + str.slice(1);\n}\nvar modelName = capitalize( name );\nvar sampleData = JSON.parse( sample );\n%>\n\n\n\n/**\n * <%= modelName %>\n\n *\n * \n * @param {Object} args - Argument object\n <% Object.keys( sampleData ).forEach( function(key) { %>\n <% var item = sampleData[key]; %>\n * @param {<%= item && item.constructor.name %>} args.<%= key %> - <%= key %>\n <% }) %>\n * @return\n */\n \n function <%= modelName %>(args){\n<% for ( key in sampleData ) { %>\n    this.<%= key %> = args.<%= key %>;\n<% } %>\n}\n\n",
+      "id": 7,
+      "syntax": "javascript",
+      "name": "Generic model"
     }
   ]
 }
