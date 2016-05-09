@@ -8,50 +8,52 @@ import 'brace/mode/javascript';
 import 'brace/theme/monokai';
 
 import Api from './api';
+import Panel from './Panel';
 
 export default class App extends Component {
 
   constructor(){
     super();
     this.state = {
-      template : {}
+      renderedTxt: '',
+      formData: {}
     };
   }
 
   componentDidMount(){
     Api.getTemplate( this.props.params.templateId )
     .then( (data) => {
-      this.setState({
-        template: data,
-      });
+      this.setState( data );
     });
   }
 
-  onSubmit( form ){
-    var rendered = ejs.render( this.state.template.template, form.formData );
+  renderTemplate( form ){
+    var renderedTxt = ejs.render( this.state.template, form.formData );
     this.setState({
-      rendered: rendered
+      renderedTxt: renderedTxt,
+      formData: form.formData,
     });
   }
 
   render() {
-    return ( this.state.template.schema? <div className="col-md-12">
+    return ( this.state.schema? <div className="col-md-12">
       <div className="col-md-12">
-        <div className="col-md-3">
-          <Form 
-            schema={this.state.template.schema}
-            onSubmit={this.onSubmit.bind(this)}
-          />
-        </div>
-        <div className="col-md-9">
+        <Panel title="Data" type="success" width="4" >
+          <Form schema={this.state.schema} onSubmit={this.renderTemplate.bind(this)} formData={this.state.formData} >
+            <button className="btn btn-success" type="submit" >Apply</button>
+          </Form>
+        </Panel>
+        <Panel title="Output" type="default" width="8" >
           <AceEditor
-            mode="javascript"
+            mode={this.state.syntax}
+            fontSize="14"
+            width="650"
             theme="monokai"
-            name="UNIQUE_ID_OF_DIV"
+            name="show-template"
             editorProps={{$blockScrolling: Infinity }}
-            value={this.state.rendered}
+            value={this.state.renderedTxt}
           />
-        </div>
+        </Panel>
       </div>
     </div> : <p>Loading...</p> );
   }
