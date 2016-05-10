@@ -3,7 +3,6 @@ import Form from 'react-jsonschema-form';
 import AceEditor from 'react-ace';
 import Ejs from 'ejs'
 
-import 'brace/mode/javascript';
 import 'brace/theme/monokai';
 
 import Panel from './Panel';

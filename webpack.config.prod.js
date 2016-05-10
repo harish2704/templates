@@ -1,16 +1,18 @@
 var path = require('path');
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var entries = [
+    './src/index',
+    './src/app.less',
+  ];
 
 module.exports = {
   devtool: 'source-map',
-  entry: [
-    './src/index',
-    './src/app.less',
-  ],
+  entry: entries,
   output: {
     path: path.join(__dirname, 'public', 'static'),
-    filename: 'bundle.js',
+		filename: '[name].bundle.js',
+		// chunkFilename: '[id].chunk.js',
     publicPath: '/static/'
   },
   plugins: [
@@ -21,6 +23,7 @@ module.exports = {
         'NODE_ENV': JSON.stringify('production')
       }
     }),
+
     new webpack.optimize.UglifyJsPlugin({
       compressor: {
         warnings: true

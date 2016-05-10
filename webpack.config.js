@@ -4,18 +4,18 @@ var webpack = require('webpack');
 module.exports = {
   devtool: 'eval',
   entry: [
-    './src/index',
     'webpack/hot/only-dev-server',
     'webpack-dev-server/client?http://localhost:8080',
+    './src/index',
   ],
   output: {
     path: path.join(__dirname, 'public', 'static'),
-    filename: 'bundle.js',
+    filename: '[name].bundle.js',
     publicPath: '/static/'
   },
   plugins: [
     new webpack.IgnorePlugin(/^(buffertools)$/),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
   ],
   node: {
     fs: 'empty'

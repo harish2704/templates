@@ -1,4 +1,6 @@
 
+import enabledSyntaxes from './ace-syntaxes';
+
 let formCreatorSchema = {
   type: 'object',
   properties: {
@@ -8,7 +10,9 @@ let formCreatorSchema = {
     },
     syntax:{
       title: 'Syntax',
-      type: 'string'
+      type: 'string',
+      enum: enabledSyntaxes,
+      default: 'javascript'
     },
     fields: {
       type: 'array',

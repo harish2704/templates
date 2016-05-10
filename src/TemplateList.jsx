@@ -30,7 +30,7 @@ export default class TemplateList extends Component {
       <div className="row">
         <br/>
         <div className="col-md-12">
-          <Link to="templates-create" className="btn btn-success">New</Link>
+          <Link to="template-create" className="btn btn-success">New</Link>
           <br/>
         </div>
         <div className="col-md-12">
