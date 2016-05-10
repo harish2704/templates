@@ -26,6 +26,9 @@ export default class TemplateViewer extends Component {
     });
     try{
       if( templateStr ){
+        templateStr = templateStr.replace( /^[ \t]*<% (.*) %>[ \t]*\n/gm, function( match, content ){
+          return '<% '+ content +' %>';
+        });
         renderedTxt = ejs.render( templateStr, formData );
         this.setState({
           renderedTxt: renderedTxt,
@@ -51,6 +54,12 @@ export default class TemplateViewer extends Component {
   render() {
     let template = this.props.template;
 
+    if( !template ){
+      return(
+        <p className="loading-message">Initializing...</p>
+      );
+    }
+
     return ( 
       <div className={'col-md-' + this.props.width}>
         <Panel title="Data Form" type="warning" width={this.props.formWidth} className="pnl-create-form" >
@@ -74,6 +83,3 @@ export default class TemplateViewer extends Component {
   }
 }
 
-TemplateViewer.defaultProps = {
-  template: {}
-};
