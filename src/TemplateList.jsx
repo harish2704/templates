@@ -30,7 +30,7 @@ export default class TemplateList extends Component {
       <div className="row">
         <br/>
         <div className="col-md-12">
-          <Link to="/templates/new" className="btn btn-success">New</Link>
+          <Link to="templates-create" className="btn btn-success">New</Link>
           <br/>
         </div>
         <div className="col-md-12">
@@ -40,10 +40,10 @@ export default class TemplateList extends Component {
               <div className="row">
                 <div className="col-md-1"> {item.id} </div>
                 <div className="col-md-3">
-                  <Link to={ '/templates/' + item.id } >
+                  <Link params={{ templateId: item.id }} to="template-view" >
                     {item.name}
                   </Link>
-                  <Link className="badge warning pull-right" to={'/templates/' + item.id + '/edit'}>Edit</Link>
+                  <Link className="badge warning pull-right" params={{ templateId: item.id }} to="template-edit">Edit</Link>
                 </div>
               </div>
             </li>

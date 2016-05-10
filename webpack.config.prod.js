@@ -1,12 +1,12 @@
 var path = require('path');
 var webpack = require('webpack');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-  devtool: 'eval',
+  devtool: 'source-map',
   entry: [
     './src/index',
-    'webpack/hot/only-dev-server',
-    'webpack-dev-server/client?http://localhost:8080',
+    './src/app.less',
   ],
   output: {
     path: path.join(__dirname, 'public', 'static'),
@@ -15,7 +15,19 @@ module.exports = {
   },
   plugins: [
     new webpack.IgnorePlugin(/^(buffertools)$/),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production')
+      }
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      compressor: {
+        warnings: true
+      }
+    }),
+    new ExtractTextPlugin('[name].css')
+
   ],
   node: {
     fs: 'empty'
@@ -36,7 +48,6 @@ module.exports = {
       {
         test: /\.jsx$/,
         loaders: [
-          'react-hot-loader',
           'babel-loader'
         ],
         include: path.join(__dirname, 'src')
@@ -44,7 +55,7 @@ module.exports = {
       { test: /\.css$/, loader: 'style!css' },
       {
         test: /\.less$/,
-        loader: 'style!css!less'
+        loader: ExtractTextPlugin.extract( 'css-loader?sourceMap!less-loader?sourceMap' )
       },
       {test: /\.woff(2)?(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/font-woff' },
       {test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/octet-stream' },

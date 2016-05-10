@@ -28,7 +28,7 @@ export default class App extends Component {
       return ( 
         <div className="row">
           <div className="col-md-12">
-            <Link className="btn btn-warning" to={'/templates/' + this.state.template.id + '/edit'}>Edit</Link>
+            <Link className="btn btn-warning" to="template-edit" params={{templateId: this.state.template.id}}>Edit</Link>
             <br/>
             <br/>
           </div>

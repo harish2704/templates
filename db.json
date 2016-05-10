@@ -113,6 +113,40 @@
       "id": 7,
       "syntax": "javascript",
       "name": "Generic model"
+    },
+    {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "title": "Your name",
+            "type": "string"
+          },
+          "age": {
+            "title": "Your age",
+            "type": "string"
+          }
+        }
+      },
+      "template": " Heloo <%= name %>\n Your age is <%= age %>",
+      "name": "test template",
+      "syntax": "javascript",
+      "id": 8
+    },
+    {
+      "name": "Test tempate 3 ",
+      "syntax": "javascript",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "title": "Your name",
+            "type": "string"
+          }
+        }
+      },
+      "template": "Heloo <%= name %> ",
+      "id": 9
     }
   ]
 }
