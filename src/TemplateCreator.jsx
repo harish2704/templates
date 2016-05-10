@@ -10,9 +10,6 @@ export default class TemplateCreator extends Component {
   constructor(){
     super();
     this.state = {
-      createdTemplate: {
-        schema: {}
-      }
     };
 
     this.setSchema = this.setSchema.bind(this);
@@ -74,7 +71,7 @@ export default class TemplateCreator extends Component {
     return(
       <div className="row">
         <TemplateEditor
-          template={this.state.loadedTempalte}
+          template={this.state.createdTemplate}
           onSchemaChange={this.setSchema}
           onTemplateChange={this.setTemplate}
           width="6"
