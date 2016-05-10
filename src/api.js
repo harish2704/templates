@@ -1,10 +1,11 @@
 // import 'whatwg-fetch';
 import URI from 'urijs';
+import config from '../config';
 
 class Api{
 
   constructor(){
-    this.endPoint = 'http://localhost:3000';
+    this.endPoint = config.apiUrl,
     this.cache = {
       templates: []
     };

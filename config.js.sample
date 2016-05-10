@@ -1,0 +1,4 @@
+module.exports = {
+  apiUrl: 'http://templates2-harish2704.rhcloud.com'
+  // apiUrl: 'http://localhost:3000'
+}
