@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "scripts": {
     "start": "npm run start-api",
+    "postinstall": "npm run build",
     "start-api": "node api-server.js",
     "start-dev": "node dev-server.js",
     "build": "webpack --progress --config webpack.config.prod.js",
