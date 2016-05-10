@@ -8,6 +8,7 @@ Templates
 A simple templates or code snippets manager written in Node.js, for developers.
 
 [ see demo ] (http://templates-harish2704.rhcloud.com/)
+[ demo of new branch ] (http://templates2-harish2704.rhcloud.com/)
 
 Features
 --------
