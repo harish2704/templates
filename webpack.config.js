@@ -7,6 +7,7 @@ module.exports = {
     'webpack/hot/only-dev-server',
     'webpack-dev-server/client?http://localhost:8080',
     './src/index',
+    './src/app.less',
   ],
   output: {
     path: path.join(__dirname, 'public', 'static'),
