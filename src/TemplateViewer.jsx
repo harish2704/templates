@@ -4,7 +4,10 @@ import Ejs from 'ejs'
 
 
 import Panel from './Panel';
-import Editor from './Editor';
+import Editor from './AceEditor';
+
+const emptySchema = {
+}
 
 export default class TemplateViewer extends Component {
 
@@ -56,12 +59,9 @@ export default class TemplateViewer extends Component {
     return ( 
       <div className={'col-md-' + this.props.width}>
         <Panel title="Data Form" type="warning" width={this.props.formWidth} className="pnl-create-form" >
-          {
-          template.schema?
-          <Form schema={template.schema} onSubmit={this.renderTemplate.bind(this)} formData={this.state.formData} >
+          <Form schema={template.schema||emptySchema} onSubmit={this.renderTemplate.bind(this)} formData={this.state.formData} >
             <button className="btn btn-success" type="submit" >Apply</button>
-          </Form> : <p>Initializing</p>
-          }
+          </Form>
         </Panel>
         <Panel title="Rendered output" type="success" width={this.props.editorWidth}  >
           <Editor

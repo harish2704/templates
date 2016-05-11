@@ -32,7 +32,7 @@
           }
         }
       },
-      "template": "<%\nvar modelName = $i.camelize( name ); \nvar sampleData = JSON.parse( sample );\n%>\n/**\n * <%= modelName %>\n\n *\n * \n * @param {Object} args - Argument object\n   <% Object.keys( sampleData ).forEach( function(key) { %>\n   <% var item = sampleData[key]; %>\n * @param {<%= item && item.constructor.name %>} args.<%= key %> - <%= key %>\n   <% }) %>\n * @return\n */\n \n function <%= modelName %>(args){\n<% for ( key in sampleData ) { %>\n    this.<%= key %> = args.<%= key %>;\n<% } %>\n}\n\n",
+      "template": "<%\nvar modelName = $i.camelize( name ); \nvar sampleData = JSON.parse( sample );\n%>\n/**\n * <%= modelName %>\n *\n * \n * @param {Object} args - Argument object\n   <% Object.keys( sampleData ).forEach( function(key) { %>\n   <% var item = sampleData[key]; %>\n * @param {<%= item && item.constructor.name %>} args.<%= key %> - <%= key %>\n   <% }) %>\n * @return\n */\n \n function <%= modelName %>(args){\n<% for ( key in sampleData ) { %>\n    this.<%= key %> = args.<%= key %>;\n<% } %>\n}\n\n",
       "id": 2
     }
   ]

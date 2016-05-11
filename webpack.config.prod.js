@@ -7,8 +7,8 @@ var enabledSyntaxes = require( './src/ace-syntaxes' );
 var entries = {
   main: './src/index',
   styles: './src/app.less',
-  // languages: enabledSyntaxes.map( v => 'brace/mode/' + v )
-  languages: enabledSyntaxes.map( v => 'react-codemirror/node_modules/codemirror/mode/' + v +'/' + v ),
+  languages: enabledSyntaxes.map( v => 'brace/mode/' + v )
+  // languages: enabledSyntaxes.map( v => 'react-codemirror/node_modules/codemirror/mode/' + v +'/' + v ),
 };
 
 module.exports = {
@@ -74,19 +74,5 @@ module.exports = {
   },
   resolve: {
     extensions: ['', '.js', '.jsx']
-  },
-  externals: {
-    'react': {
-      root: 'React',
-      commonjs2: 'react',
-      commonjs: 'react',
-      amd: 'react'
-    },
-    'react-router': {
-      root: 'ReactRouter',
-      commonjs2: 'react-router',
-      commonjs: 'react-router',
-      amd: 'react-router'
-    }
   },
 };

@@ -1,9 +1,6 @@
 import React from 'react';
 import Codemirror from 'react-codemirror';
 
-// import AceEditor from 'react-ace';
-// import 'brace/theme/monokai';
-
 export default function( props ){
 
   let options = {

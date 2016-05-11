@@ -9,7 +9,8 @@ var entries = {
     './src/index'
   ],
   styles: './src/app.less',
-  languages: enabledSyntaxes.map( v => 'react-codemirror/node_modules/codemirror/mode/' + v +'/' + v ),
+  languages: enabledSyntaxes.map( v => 'brace/mode/' + v ),
+  // languages: enabledSyntaxes.map( v => 'react-codemirror/node_modules/codemirror/mode/' + v +'/' + v ),
 };
 
 module.exports = {
@@ -17,12 +18,14 @@ module.exports = {
   entry: entries,
   output: {
     path: path.join(__dirname, 'public', 'static'),
-    filename: '[name].bundle.[ext]',
+    filename: '[name].bundle.js',
     publicPath: '/static/'
   },
   plugins: [
     new webpack.IgnorePlugin(/^(buffertools)$/),
+    new webpack.IgnorePlugin(/^(worker\/)*$/),
     new webpack.HotModuleReplacementPlugin(),
+    new ExtractTextPlugin('[name].bundle.css')
   ],
   node: {
     fs: 'empty'

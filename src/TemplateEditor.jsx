@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import Form from 'react-jsonschema-form';
-import AceEditor from 'react-ace';
 
-import 'brace/theme/monokai';
 
 import Panel from './Panel';
 import formCreatorSchema from './form-creator-schema';
+import Editor from './AceEditor';
 
 
 let formStyle = {
@@ -72,6 +71,7 @@ export default class TemplateEditor extends Component {
 
   updateSchema( form ){
     var formProperties = {};
+    if( !( form.formData && form.formData.fields ) ) { return; }
     form.formData.fields.forEach(( item ) => {
       formProperties[item.name] = {
         title: item.title,
@@ -109,7 +109,7 @@ export default class TemplateEditor extends Component {
           </Form>
         </Panel>
         <Panel type="success" title="Template Text to be rendered" width={this.props.editorWidth}  >
-          <AceEditor
+          <Editor
             mode={this.state.currentFormData.syntax}
             theme="monokai"
             fontSize={14}
