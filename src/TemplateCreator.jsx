@@ -10,6 +10,7 @@ export default class TemplateCreator extends Component {
   constructor(){
     super();
     this.state = {
+      createdTemplate: {}
     };
 
     this.setSchema = this.setSchema.bind(this);
@@ -85,4 +86,5 @@ export default class TemplateCreator extends Component {
     );
   }
 }
+
 

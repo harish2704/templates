@@ -1,9 +1,11 @@
 {
   "presets": [
-  "es2015",
-  "stage-0",
-  "react"
+    "es2015",
+    "stage-0",
+    "react"
   ],
   "plugins": [
+    "transform-export-extensions",
+    "add-module-exports"
   ]
 }

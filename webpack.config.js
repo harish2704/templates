@@ -1,17 +1,23 @@
 var path = require('path');
 var webpack = require('webpack');
+var enabledSyntaxes = require( './src/ace-syntaxes' );
+
+var entries = {
+  main: [ 
+    'webpack/hot/only-dev-server',
+    'webpack-dev-server/client?http://localhost:8080',
+    './src/index'
+  ],
+  styles: './src/app.less',
+  languages: enabledSyntaxes.map( v => 'react-codemirror/node_modules/codemirror/mode/' + v +'/' + v ),
+};
 
 module.exports = {
   devtool: 'eval',
-  entry: [
-    'webpack/hot/only-dev-server',
-    'webpack-dev-server/client?http://localhost:8080',
-    './src/index',
-    './src/app.less',
-  ],
+  entry: entries,
   output: {
     path: path.join(__dirname, 'public', 'static'),
-    filename: '[name].bundle.js',
+    filename: '[name].bundle.[ext]',
     publicPath: '/static/'
   },
   plugins: [

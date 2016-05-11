@@ -27,20 +27,20 @@ export default class TemplateEditor extends Component {
 
 
   componentWillReceiveProps( nextProps ){
-    if( nextProps.template ){
-      this.setStateFromExisting( nextProps.template );
-    }
+    this.setStateFromExisting( nextProps.template );
   }
 
   componentDidMount(){
-    if( this.props.template ){
-      this.setStateFromExisting( this.props.template );
-    }
+    this.setStateFromExisting( this.props.template );
   }
 
   setStateFromExisting( template ){
     var currentFormData = {},
         props;
+
+    if( !( template && template.schema ) ){
+      return;
+    }
 
     props = template.schema.properties;
 

@@ -1,35 +1,41 @@
 var path = require('path');
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var entries = [
-    './src/index',
-    './src/app.less',
-  ];
+
+var enabledSyntaxes = require( './src/ace-syntaxes' );
+
+var entries = {
+  main: './src/index',
+  styles: './src/app.less',
+  // languages: enabledSyntaxes.map( v => 'brace/mode/' + v )
+  languages: enabledSyntaxes.map( v => 'react-codemirror/node_modules/codemirror/mode/' + v +'/' + v ),
+};
 
 module.exports = {
+  // devtool: 'eval',
   devtool: 'source-map',
   entry: entries,
   output: {
     path: path.join(__dirname, 'public', 'static'),
 		filename: '[name].bundle.js',
-		// chunkFilename: '[id].chunk.js',
+    chunkFilename: '[id].chunk.js',
     publicPath: '/static/'
   },
   plugins: [
-    new webpack.IgnorePlugin(/^(buffertools)$/),
-    new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify('production')
       }
     }),
-
+    new webpack.IgnorePlugin(/^(buffertools)$/),
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({
       compressor: {
         warnings: true
       }
     }),
-    new ExtractTextPlugin('[name].css')
+    new ExtractTextPlugin('[name].bundle.css')
 
   ],
   node: {
@@ -68,5 +74,19 @@ module.exports = {
   },
   resolve: {
     extensions: ['', '.js', '.jsx']
+  },
+  externals: {
+    'react': {
+      root: 'React',
+      commonjs2: 'react',
+      commonjs: 'react',
+      amd: 'react'
+    },
+    'react-router': {
+      root: 'ReactRouter',
+      commonjs2: 'react-router',
+      commonjs: 'react-router',
+      amd: 'react-router'
+    }
   },
 };

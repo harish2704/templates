@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import Form from 'react-jsonschema-form';
-import AceEditor from 'react-ace';
 import Ejs from 'ejs'
 
-import 'brace/theme/monokai';
 
 import Panel from './Panel';
+import Editor from './Editor';
 
 export default class TemplateViewer extends Component {
 
@@ -54,21 +53,18 @@ export default class TemplateViewer extends Component {
   render() {
     let template = this.props.template;
 
-    if( !template ){
-      return(
-        <p className="loading-message">Initializing...</p>
-      );
-    }
-
     return ( 
       <div className={'col-md-' + this.props.width}>
         <Panel title="Data Form" type="warning" width={this.props.formWidth} className="pnl-create-form" >
+          {
+          template.schema?
           <Form schema={template.schema} onSubmit={this.renderTemplate.bind(this)} formData={this.state.formData} >
             <button className="btn btn-success" type="submit" >Apply</button>
-          </Form>
+          </Form> : <p>Initializing</p>
+          }
         </Panel>
         <Panel title="Rendered output" type="success" width={this.props.editorWidth}  >
-          <AceEditor
+          <Editor
             mode={template.syntax}
             fontSize={14}
             theme="monokai"
